@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Weiterleitung zur Bewertung</title>
+  <script>
+    // Praxisname aus der URL holen
+    const params = new URLSearchParams(window.location.search);
+    const rawPraxis = params.get("praxis") || "";
+
+    // Normalisieren: alles klein, Leerzeichen und Sonderzeichen entfernen
+    const normalizedPraxis = rawPraxis.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9]/g, "");
+
+    // Mapping der Praxisnamen auf Google-Bewertungslinks
+    const links = {
+      "omniaphysiooberwil": "https://omnia-physio.ch/physio-oberwil",  // <-- HIER DEIN GOOGLE-LINK
+      // Weitere Einträge kannst du so ergänzen:
+      // "omniaphysiosissach": "https://g.page/r/DEIN-SISSACH-LINK",
+    };
+
+    const ziel = links[normalizedPraxis];
+
+    if (ziel) {
+      // Sofortige Weiterleitung
+      window.location.replace(ziel);
+    } else {
+      // Fallback: Praxis nicht erkannt
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("meldung").textContent =
+          "Standort nicht erkannt. Bitte prüfen Sie den Link oder kontaktieren Sie uns.";
+      });
+    }
+  </script>
+</head>
+<body>
+  <p id="meldung">Sie werden jetzt weitergeleitet…</p>
+</body>
+</html>
