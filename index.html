@@ -4,18 +4,19 @@
   <meta charset="UTF-8">
   <title>Weiterleitung zur Bewertung</title>
   <script>
-    // Praxisname aus der URL holen
+    // Praxis Postleitzahl holen
     const params = new URLSearchParams(window.location.search);
     const rawPraxis = params.get("praxis") || "";
 
     // Normalisieren: alles klein, Leerzeichen und Sonderzeichen entfernen
     const normalizedPraxis = rawPraxis.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9]/g, "");
 
-    // Mapping der Praxisnamen auf Google-Bewertungslinks
+    // Mapping der Praxisnamen auf Webseite-Link
     const links = {
-      "4104": "https://omnia-physio.ch/physio-oberwil",  // <-- HIER DEIN GOOGLE-LINK
-      // Weitere Einträge kannst du so ergänzen:
-      // "omniaphysiosissach": "https://g.page/r/DEIN-SISSACH-LINK",
+      "4104": "https://omnia-physio.ch/physio-oberwil", 
+      "4450": "https://omnia-physio.ch/physio-sissach",
+      "4052": "https://omnia-physio.ch/physio-basel",
+      "4313": "https://omnia-physio.ch/physio-moehlin"
     };
 
     const ziel = links[normalizedPraxis];
